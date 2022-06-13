@@ -2,6 +2,7 @@ package com.generation.ecorede.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,8 +43,8 @@ public class Postagem {
 	@Size(min = 5, max = 100, message = "O atributo regiões deve conter no min 5 letras e no maximo 100")
 	private String regioes;
 	
-	@NotNull
-	private Long curtir;
+	@Column(columnDefinition = "integer default 0")
+    private int curtir;
 
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
@@ -101,11 +102,11 @@ public class Postagem {
 		this.regioes = regioes;
 	}
 
-	public Long getCurtir() {
+	public int getCurtir() {
 		return curtir;
 	}
 
-	public void setCurtir(Long curtir) {
+	public void setCurtir(int curtir) {
 		this.curtir = curtir;
 	}
 

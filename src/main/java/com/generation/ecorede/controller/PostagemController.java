@@ -32,6 +32,9 @@ public class PostagemController {
 	@Autowired
 	private TemaRepository temaRepository;
 	
+	@Autowired
+	private PostagemRepository postagemService;
+	
 	@GetMapping
 	public ResponseEntity<List<Postagem>> getAll(){
 		return ResponseEntity.ok(postagemRepository.findAll());
@@ -68,6 +71,14 @@ public class PostagemController {
 		}		
 		
 		return ResponseEntity.notFound().build();
+	}
+	
+	@PutMapping("/curtir/{id}")
+    public ResponseEntity<Postagem> curtirPostagemId (@PathVariable Long id){
+
+        return postagemService.curtir(id)
+            .map(resposta-> ResponseEntity.ok(resposta))
+            .orElse(ResponseEntity.badRequest().build());
 	}
 	
 	@DeleteMapping("/{id}")
