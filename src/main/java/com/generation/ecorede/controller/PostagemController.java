@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.generation.ecorede.model.Postagem;
 import com.generation.ecorede.repository.PostagemRepository;
 import com.generation.ecorede.repository.TemaRepository;
+import com.generation.ecorede.service.PostagemService;
 
 @RestController
 @RequestMapping("/postagem")
@@ -33,7 +34,7 @@ public class PostagemController {
 	private TemaRepository temaRepository;
 	
 	@Autowired
-	private PostagemRepository postagemService;
+	private PostagemService postagemService;
 	
 	@GetMapping
 	public ResponseEntity<List<Postagem>> getAll(){
@@ -73,14 +74,6 @@ public class PostagemController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@PutMapping("/curtir/{id}")
-    public ResponseEntity<Postagem> curtirPostagemId (@PathVariable Long id){
-
-        return postagemService.curtir(id)
-            .map(resposta-> ResponseEntity.ok(resposta))
-            .orElse(ResponseEntity.badRequest().build());
-	}
-	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletePostagem(@PathVariable Long id) {
 		
@@ -89,5 +82,14 @@ public class PostagemController {
 					return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 				})
 				.orElse(ResponseEntity.notFound().build());
+	}
+	
+	@PutMapping("/curtir/{id}")
+	public ResponseEntity<Postagem> curtirPostagemId (@PathVariable Long id){
+		
+		return (postagemService).curtir(id)
+			.map(resposta-> ResponseEntity.ok(resposta))
+			.orElse(ResponseEntity.badRequest().build());
+	
 	}
 }

@@ -16,5 +16,8 @@ public interface PostagemRepository extends JpaRepository <Postagem, Long> {
 	
 	boolean existsById(Long id);
 
-	public Optional<Postagem> curtir(Long id);
+
+	
+
+
 }

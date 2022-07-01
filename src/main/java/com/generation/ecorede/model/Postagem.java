@@ -10,11 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import org.hibernate.annotations.UpdateTimestamp;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity //create table
@@ -43,8 +40,8 @@ public class Postagem {
 	@Size(min = 5, max = 100, message = "O atributo regiões deve conter no min 5 letras e no maximo 100")
 	private String regioes;
 	
-	@Column(columnDefinition = "integer default 0")
-    private int curtir;
+	 @Column(columnDefinition = "integer default 0")
+		private int curtir;
 
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
@@ -102,14 +99,6 @@ public class Postagem {
 		this.regioes = regioes;
 	}
 
-	public int getCurtir() {
-		return curtir;
-	}
-
-	public void setCurtir(int curtir) {
-		this.curtir = curtir;
-	}
-
 	public Tema getTema() {
 		return tema;
 	}
@@ -125,6 +114,14 @@ public class Postagem {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
+	public int getCurtir() {
+		return curtir;
+	}
+	public void setCurtir(int curtir) {
+		this.curtir = curtir;
+	}
+		
 
 	
 }
